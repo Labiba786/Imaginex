@@ -1,147 +1,77 @@
-// const swaggerJSDoc = require('swagger-jsdoc');
+const swaggerJSDoc = require("swagger-jsdoc");
 
-// const options = {
-//   definition: {
-//     openapi: '3.0.0',
-//     info: {
-//       title: 'Imaginex API',
-//       version: '1.0.0',
-//       description: 'API documentation for the Imaginex AI Image Generation Project',
-//     },
-//     servers: [
-//       {
-//         url: 'http://localhost:3001',
-//         description: 'Local Development Server',
-//       },
-//       // Add your production server if needed
-//       // {
-//       //   url: 'https://api.imaginex.com',
-//       //   description: 'Production Server',
-//       // },
-//     ],
-//     components: {
-//       securitySchemes: {
-//         bearerAuth: {
-//           type: 'http',
-//           scheme: 'bearer',
-//           bearerFormat: 'JWT',
-//         },
-//       },
-//       schemas: {
-//         Image: {
-//           type: 'object',
-//           properties: {
-//             _id: { type: 'string' },
-//             prompt: { type: 'string' },
-//             imageUrl: { type: 'string' },
-//             tags: {
-//               type: 'array',
-//               items: { type: 'string' },
-//             },
-//             likes: { type: 'number' },
-//             user: {
-//               type: 'object',
-//               properties: {
-//                 _id: { type: 'string' },
-//                 fullName: { type: 'string' },
-//                 email: { type: 'string' },
-//               },
-//             },
-//             createdAt: {
-//               type: 'string',
-//               format: 'date-time',
-//             },
-//           },
-//         },
-//         User: {
-//           type: 'object',
-//           properties: {
-//             _id: { type: 'string' },
-//             fullName: { type: 'string' },
-//             email: { type: 'string' },
-//             token: { type: 'string' },
-//           },
-//         },
-//       },
-//     },
-//     security: [
-//       {
-//         bearerAuth: [],
-//       },
-//     ],
-//     tags: [
-//       { name: 'Auth', description: 'Authentication routes' },
-//       { name: 'Image', description: 'Image generation, download, share' },
-//       { name: 'Gallery', description: 'User gallery (save, view, manage AI images)' },
-//       { name: 'Explore', description: 'Explore public image gallery' },
-//     ],
-//   },
-//    apis: ['./src/routes/*.js'], // All route files inside routes folder
-// };
+// Determine server URL dynamically
+const renderUrl = process.env.RENDER_EXTERNAL_URL?.replace(/\/$/, "");
+const localUrl = `http://localhost:${process.env.PORT || 3001}`;
 
-// const swaggerSpec = swaggerJSDoc(options);
+const serverUrls = [
+  {
+    url: localUrl,
+    description: "Local Development Server",
+  },
+];
 
-// module.exports = swaggerSpec;
-
-const swaggerJSDoc = require('swagger-jsdoc');
+if (renderUrl) {
+  serverUrls.push({
+    url: renderUrl,
+    description: "Render Deployment",
+  });
+}
 
 const options = {
   definition: {
-    openapi: '3.0.0',
+    openapi: "3.0.0",
     info: {
-      title: 'Imaginex API',
-      version: '1.0.0',
-      description: 'API documentation for the Imaginex AI Image Generation Project',
+      title: "Imaginex API",
+      version: "1.0.0",
+      description:
+        "API documentation for the Imaginex AI Image Generation Project",
     },
-    servers: [
-      {
-        url: 'http://localhost:3001',
-        description: 'Local Development Server',
-      },
-       // Add your production server if needed
-       // {
-       //   url: 'https://api.imaginex.com',
-       //   description: 'Production Server',
-       // },
-    ],
+    servers: serverUrls,
     components: {
       securitySchemes: {
         bearerAuth: {
-          type: 'http',
-          scheme: 'bearer',
-          bearerFormat: 'JWT',
+          type: "http",
+          scheme: "bearer",
+          bearerFormat: "JWT",
         },
       },
       schemas: {
         Image: {
-          type: 'object',
+          type: "object",
           properties: {
-            _id: { type: 'string', example: '64b2e3c4c56f7f1234567890' },
-            prompt: { type: 'string', example: 'A futuristic city on Mars' },
-            style: { type: 'string', example: 'digital-art' },
-            size: { type: 'string', example: 'square' },
-            imageUrl: { type: 'string', example: 'https://cdn.imaginex.ai/image123.png' },
-            user: { type: 'string', example: '64a1d1c2f7e9a1234567890b' },
-            createdAt: { type: 'string', format: 'date-time' },
+            _id: { type: "string", example: "64b2e3c4c56f7f1234567890" },
+            prompt: { type: "string", example: "A futuristic city on Mars" },
+            style: { type: "string", example: "digital-art" },
+            size: { type: "string", example: "square" },
+            imageUrl: {
+              type: "string",
+              example: "https://cdn.imaginex.ai/image123.png",
+            },
+            user: { type: "string", example: "64a1d1c2f7e9a1234567890b" },
+            createdAt: { type: "string", format: "date-time" },
           },
         },
         Prompt: {
-          type: 'object',
+          type: "object",
           properties: {
-            _id: { type: 'string', example: '64b2f3e9d1c3a01234567891' },
-            text: { type: 'string', example: 'A cyberpunk samurai in Tokyo' },
-            user: { type: 'string', example: '64a1d1c2f7e9a1234567890b' },
-            timesUsed: { type: 'integer', example: 3 },
-            lastUsedAt: { type: 'string', format: 'date-time' },
+            _id: { type: "string", example: "64b2f3e9d1c3a01234567891" },
+            text: { type: "string", example: "A cyberpunk samurai in Tokyo" },
+            user: { type: "string", example: "64a1d1c2f7e9a1234567890b" },
+            timesUsed: { type: "integer", example: 3 },
+            lastUsedAt: { type: "string", format: "date-time" },
           },
         },
         User: {
-          type: 'object',
+          type: "object",
           properties: {
-            _id: { type: 'string', example: '64a1d1c2f7e9a1234567890b' },
-            fullName: { type: 'string', example: 'John Doe' },
-            email: { type: 'string', example: 'john@example.com' },
-            token: { type: 'string', example: 'eyJhbGciOiJIUzI1NiIsInR5cCI...' },
+            _id: { type: "string", example: "64a1d1c2f7e9a1234567890b" },
+            fullName: { type: "string", example: "John Doe" },
+            email: { type: "string", example: "john@example.com" },
+            token: {
+              type: "string",
+              example: "eyJhbGciOiJIUzI1NiIsInR5cCI...",
+            },
           },
         },
       },
@@ -152,16 +82,18 @@ const options = {
       },
     ],
     tags: [
-      { name: 'Auth', description: 'Authentication routes' },
-      { name: 'Image', description: 'Image generation, storage, and viewing' },
-      { name: 'Gallery', description: 'User gallery (save, view, manage AI images)' },
-      { name: 'Explore', description: 'Explore public image gallery' },
+      { name: "Auth", description: "Authentication routes" },
+      { name: "Image", description: "Image generation, storage, and viewing" },
+      {
+        name: "Gallery",
+        description: "User gallery (save, view, manage AI images)",
+      },
+      { name: "Explore", description: "Explore public image gallery" },
     ],
   },
-  apis: ['./src/routes/*.js'], // Adjust this if your route files are located elsewhere
+  apis: ["./src/routes/*.js"], // Update if your route files are elsewhere
 };
 
 const swaggerSpec = swaggerJSDoc(options);
 
 module.exports = swaggerSpec;
-

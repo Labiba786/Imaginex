@@ -1,10 +1,11 @@
+# ai_model/requirements.txt
 flask==3.0.0
 flask-cors==4.0.0
-pillow==9.5.0
+pillow==9.4.0
 requests>=2.32.3
 python-dotenv==1.0.0
 auth0-python==4.9.0
 instructor==1.8.0
-waitress==2.1.2      # ✅ Use this for Windows/production server locally
-gunicorn==23.0.0     # ✅ Used only on Render/Linux
+gunicorn==23.0.0
 packaging==25.0
+waitress==2.1.2      # ✅ Use this for Windows/production server locally

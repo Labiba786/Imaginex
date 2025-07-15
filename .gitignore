@@ -1,0 +1,12 @@
+# Ignore virtual environment
+ai_model/venv/
+.env
+__pycache__/
+*.pyc
+.DS_Store
+*.log
+
+
+#Ignore node modules of the frontend and backend
+frontend/node_modules/
+backend/node_modules/

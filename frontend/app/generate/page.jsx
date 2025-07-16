@@ -18,6 +18,7 @@ export default function GeneratePage() {
   const [loading, setLoading] = useState(false)
   const [result, setResult] = useState(null)
   const [generationHistory, setGenerationHistory] = useState([])
+  const [jwtToken, setJwtToken] = useState("")
   const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3001";
 
   useEffect(() => {

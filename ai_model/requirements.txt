@@ -8,4 +8,4 @@ auth0-python==4.9.0
 instructor==1.8.0
 gunicorn==23.0.0
 packaging==25.0
-waitress==2.1.2      # ✅ Use this for Windows/production server locally
+waitress==2.1.2      

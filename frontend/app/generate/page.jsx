@@ -21,7 +21,7 @@ export default function GeneratePage() {
   // const userData = localStorage.getItem("imaginex_user") || ""; // Adjust based on your auth setup
   const userData = JSON.parse(localStorage.getItem("imaginex_user") || "{}");
   const jwtToken = userData?.token || "";
-  const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3001";
+  const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "https://imaginex-backend-svsn.onrender.com";
 
   // const handleSubmit = async (e) => {
   //   e.preventDefault()

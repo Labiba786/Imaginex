@@ -62,3 +62,9 @@ app.listen(port, () => {
   console.log(`🚀 Server running at: ${baseUrl}`);
   console.log(`📚 API Docs available at: ${baseUrl}/api-docs`);
 });
+
+// In your backend CORS configuration
+const allowedOrigins = [
+  'https://your-app.vercel.app',
+  'https://your-custom-domain.com'
+];

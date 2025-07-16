@@ -21,59 +21,7 @@ export default function GeneratePage() {
   // const userData = localStorage.getItem("imaginex_user") || ""; // Adjust based on your auth setup
   const userData = JSON.parse(localStorage.getItem("imaginex_user") || "{}");
   const jwtToken = userData?.token || "";
-  const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "https://imaginex-backend-svsn.onrender.com";
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault()
-  //   if (!prompt.trim()) return
-
-  //   setLoading(true)
-  //   console.log(userData); // Debugging: Check if token is being retrieved correctly
-  //   try {
-  //     const response = await fetch(`${baseUrl}/api/image/generate`, {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         // If you use JWT in localStorage/cookies, add it here if needed
-  //         "Authorization": `Bearer ${jwtToken}`,
-  //       },
-  //       body: JSON.stringify({ prompt, style, size }),
-  //     })
-
-  //     if (!response.ok) {
-  //       throw new Error("Failed to generate image")
-  //     }
-
-  //     // If backend returns image binary, convert to blob URL
-  //     const contentType = response.headers.get("Content-Type")
-  //     let imageUrl
-  //     if (contentType && contentType.startsWith("image/")) {
-  //       const blob = await response.blob()
-  //       imageUrl = URL.createObjectURL(blob)
-  //     } else {
-  //       // fallback: try to parse JSON error
-  //       const data = await response.json()
-  //       throw new Error(data.error || "Failed to generate image")
-  //     }
-
-  //     const newImage = {
-  //       id: Date.now(),
-  //       url: imageUrl,
-  //       prompt,
-  //       style,
-  //       size,
-  //       timestamp: new Date().toISOString(),
-  //     }
-
-  //     setResult(newImage)
-  //     setGenerationHistory((prev) => [newImage, ...prev.slice(0, 4)])
-  //   } catch (error) {
-  //     console.error("Error generating image:", error)
-  //   } finally {
-  //     setLoading(false)
-  //   }
-  // }
-
+  const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3001";
 
   const handleSubmit = async (e) => {
   e.preventDefault();

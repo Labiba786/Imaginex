@@ -18,17 +18,21 @@ export default function GeneratePage() {
   const [loading, setLoading] = useState(false)
   const [result, setResult] = useState(null)
   const [generationHistory, setGenerationHistory] = useState([])
-  // const userData = localStorage.getItem("imaginex_user") || ""; // Adjust based on your auth setup
-  const userData = JSON.parse(localStorage.getItem("imaginex_user") || "{}");
-  const jwtToken = userData?.token || "";
   const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3001";
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const userData = JSON.parse(localStorage.getItem("imaginex_user") || "{}")
+      setJwtToken(userData?.token || "")
+    }
+  }, [])
 
   const handleSubmit = async (e) => {
   e.preventDefault();
   if (!prompt.trim()) return;
 
   setLoading(true);
-  const jwtToken = JSON.parse(localStorage.getItem("imaginex_user") || "{}")?.token || "";
+  // const jwtToken = JSON.parse(localStorage.getItem("imaginex_user") || "{}")?.token || "";
 
   try {
     const response = await fetch(`${baseUrl}/api/image/generate`, {
